@@ -7,7 +7,8 @@ Gem::Specification.new do |s|
   s.version     = Wrapped::VERSION
   s.authors     = ["Mike Burns"]
   s.email       = ["mike@mike-burns.com"]
-  s.homepage    = ""
+  s.homepage    = "http://github.com/mike-burns/wrapped"
+  s.license     = 'BSD'
   s.summary     = %q{The maybe functor for Ruby}
   s.description = %q{The unchecked nil is a dangerous concept leading to NoMethodErrors at runtime. It would be better if you were forced to explictly unwrap potentially nil values. This library provides mechanisms and convenience methods for making this more possible.}
 
