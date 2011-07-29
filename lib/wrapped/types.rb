@@ -42,6 +42,10 @@ class Present
   def try
     yield unwrap
   end
+
+  def fmap
+    (yield unwrap).wrapped
+  end
 end
 
 class Blank
@@ -77,6 +81,10 @@ class Blank
   end
 
   def try
+    self
+  end
+
+  def fmap
     self
   end
 end

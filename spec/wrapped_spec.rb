@@ -73,6 +73,7 @@ end
 
 # This behavior is different from Haskell and Scala.
 # It is done this way for consistency with Ruby.
+# See the functor description later for `fmap'.
 describe Wrapped, 'enumerable' do
   let(:value)   { 1 }
   let(:just)    { 1.wrapped }
@@ -156,5 +157,19 @@ describe Wrapped, 'monadic' do
 
   it 'produces blank from #try for a wrapped nil' do
     nothing.try {|n| (n+1).wrapped}.should be_blank
+  end
+end
+
+describe Wrapped, 'functor' do
+  let(:value)   { 1 }
+  let(:just)    { 1.wrapped }
+  let(:nothing) { nil.wrapped }
+
+  it 'unwraps, applies the block, then re-wraps for a wrapped value' do
+    just.fmap {|n| n+1}.unwrap.should == value+1
+  end
+
+  it 'produces the blank for a wrapped nil' do
+    nothing.fmap {|n| n+1}.should be_blank
   end
 end

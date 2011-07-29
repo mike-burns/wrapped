@@ -92,7 +92,7 @@ Cool Stuff
 ----------
 
 A wrapped value mixes in Enumerable. The functional world would say "that's a
-functor!". They're right.
+functor!". They're close enough.
 
 This means that you can `map`, `inject`, `to_a`, `any?`, and so on over your
 wrapped value. By wrapping it you've just made it more powerful!
@@ -112,6 +112,12 @@ And then we have `try`, which you can use to produce another wrapped object:
 Those same people who will exclaim things about functors will, at this point,
 get giddy about monads. I mean, they're right, but they can relax. It's just a
 monad.
+
+Those people ("what do you mean, 'those people'?!") may prefer the `fmap`
+method:
+
+    irb> 1.wrapped.fmap {|n| n+1}.unwrap_or(0) {|n| n+4}
+    => 6
 
 Other Methods
 -------------
