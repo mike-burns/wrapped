@@ -5,8 +5,12 @@ class Present
     @value = value
   end
 
-  def unwrap_or(_, &block)
-    unwrap(&block)
+  def unwrap_or(_)
+    if block_given?
+      yield unwrap
+    else
+      unwrap
+    end
   end
 
   def present(&block)
@@ -18,17 +22,13 @@ class Present
     self
   end
 
-  def each(&block)
-    unwrap(&block)
+  def each
+    yield unwrap if block_given?
     [unwrap]
   end
 
   def unwrap
-    if block_given?
-      yield @value
-    else
-      @value
-    end
+    @value
   end
 
   def present?

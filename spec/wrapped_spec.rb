@@ -26,14 +26,6 @@ describe Wrapped, 'accessing' do
   it 'raises an exception when called on the wrapped nil' do
     expect { nothing.unwrap }.to raise_error(IndexError)
   end
-
-  it 'produces the value of the block for a wrapped object' do
-    just.unwrap {|n| n+1}.should == value+1
-  end
-
-  it 'raises an exception when called on the wrapped nil, even with a block' do
-    expect { nothing.unwrap { 2 } }.to raise_error(IndexError)
-  end
 end
 
 describe Wrapped, 'callbacks' do
