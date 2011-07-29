@@ -1,4 +1,5 @@
-require 'wrapped/types'
+require 'wrapped/present'
+require 'wrapped/blank'
 
 class Object
   def wrapped
