@@ -38,6 +38,10 @@ class Present
   def blank?
     false
   end
+
+  def try
+    yield unwrap
+  end
 end
 
 class Blank
@@ -70,5 +74,9 @@ class Blank
 
   def blank?
     true
+  end
+
+  def try
+    self
   end
 end
