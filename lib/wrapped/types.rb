@@ -5,8 +5,8 @@ class Present
     @value = value
   end
 
-  def unwrap_or(_)
-    unwrap
+  def unwrap_or(_, &block)
+    unwrap(&block)
   end
 
   def present(&block)
@@ -19,12 +19,16 @@ class Present
   end
 
   def each(&block)
-    block.call(unwrap) unless block.nil?
+    unwrap(&block)
     [unwrap]
   end
 
   def unwrap
-    @value
+    if block_given?
+      yield @value
+    else
+      @value
+    end
   end
 
   def present?
@@ -47,7 +51,7 @@ class Blank
     default
   end
 
-  def present(&ignored)
+  def present
     self
   end
 
@@ -56,7 +60,7 @@ class Blank
     self
   end
 
-  def each(&ignored)
+  def each
     []
   end
 
