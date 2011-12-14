@@ -80,10 +80,18 @@ class Present
 
   # Run a block within the wrapper. This produces a wrapped value.
   #
-  # > w.try {|n| n+1 }
+  # > w.fmap {|n| n+1 }
   #
   # This makes it a functor.
   def fmap
     (yield unwrap).wrapped
+  end
+
+  # Is this wrapped value equal to the given wrapped value?
+  #
+  # > 1.wrapped == 1.wrapped
+  # > nil.wrapped == 2.wrapped
+  def ==(other)
+    unwrap == other.unwrap_or(nil)
   end
 end

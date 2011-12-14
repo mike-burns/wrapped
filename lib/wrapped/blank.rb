@@ -63,4 +63,13 @@ class Blank
   def fmap
     self
   end
+
+  # Is this wrapped value equal to the given wrapped value? All blank values
+  # are equal to each other.
+  #
+  # > nil.wrapped == nil.wrapped
+  # > 1.wrapped == nil.wrapped
+  def ==(other)
+    other.blank?
+  end
 end

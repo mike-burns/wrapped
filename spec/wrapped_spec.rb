@@ -173,3 +173,25 @@ describe Wrapped, 'functor' do
     nothing.fmap {|n| n+1}.should be_blank
   end
 end
+
+describe Wrapped, 'equality' do
+  it 'is equal with the same wrapped value' do
+    1.wrapped.should == 1.wrapped
+  end
+
+  it 'is not equal with a different wrapped value' do
+    1.wrapped.should_not == 2.wrapped
+  end
+
+  it 'is equal with two wrapped nils' do
+    nil.wrapped.should == nil.wrapped
+  end
+
+  it 'is not equal with a wrapped nil and a wrapped value' do
+    nil.wrapped.should_not == 1.wrapped
+  end
+
+  it 'is not equal with a wrapped value and a wrapped nil' do
+    1.wrapped.should_not == nil.wrapped
+  end
+end
