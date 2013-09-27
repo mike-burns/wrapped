@@ -91,29 +91,10 @@ unwrapping it.
 Cool Stuff
 ----------
 
-A wrapped value mixes in Enumerable. The functional world would say "that's a
-functor!". They're close enough.
+Some people will exclaim things about functors will, at this point, get giddy
+about monads. I mean, they're right, but they can relax. It's just a monad.
 
-This means that you can `map`, `inject`, `to_a`, `any?`, and so on over your
-wrapped value. By wrapping it you've just made it more powerful!
-
-For example:
-
-    irb(main):054:0> 1.wrapped.inject(0) {|_, n| n+1}
-    => 2
-    irb(main):055:0> nil.wrapped.inject(0) {|_, n| n+1}
-    => 0
-
-And then we have `try`, which you can use to produce another wrapped object:
-
-    irb> 1.wrapped.try {|n| (n + 1).wrapped}.try {|n| (n*2).wrapped}.unwrap
-    => 4
-
-Those same people who will exclaim things about functors will, at this point,
-get giddy about monads. I mean, they're right, but they can relax. It's just a
-monad.
-
-Those people ("what do you mean, 'those people'?!") may prefer the `fmap`
+Those people ("what do you mean, 'those people'?!") may appreciate the `fmap`
 method:
 
     irb> 1.wrapped.fmap {|n| n+1}.unwrap_or(0) {|n| n+4}
