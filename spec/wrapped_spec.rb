@@ -71,43 +71,6 @@ describe Wrapped, 'callbacks' do
   end
 end
 
-# This behavior is different from Haskell and Scala.
-# It is done this way for consistency with Ruby.
-# See the functor description later for `fmap'.
-describe Wrapped, 'enumerable' do
-  let(:value)   { 1 }
-  let(:just)    { 1.wrapped }
-  let(:nothing) { nil.wrapped }
-
-  it 'acts over the value for #each on a wrapped value' do
-    result = -1
-    just.each {|v| result = v }
-    result.should == value
-  end
-
-  it 'produces a singleton array of the value for a wrapped value on #each' do
-    just.each.should == [value]
-  end
-
-  it 'skips the block for #each on a wrapped nil' do
-    result = -1
-    nothing.each {|v| result = v }
-    result.should == -1
-  end
-
-  it 'produces the empty array for a wrapped nil on #each' do
-    nothing.each.should be_empty
-  end
-
-  it 'maps over the value for a wrapped value' do
-    just.map {|n| n + 1}.should == [value+1]
-  end
-
-  it 'map produces the empty list for a wrapped nil' do
-    nothing.map {|n| n + 1}.should == []
-  end
-end
-
 describe Wrapped, 'queries' do
   let(:value)   { 1 }
   let(:just)    { 1.wrapped }

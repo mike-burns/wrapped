@@ -1,7 +1,5 @@
 # The class represents a lack of something.
 class Blank
-  include Enumerable
-
   # It is an error (specifically, an IndexError) to use this method.
   def unwrap
     raise IndexError.new("Blank has no value")
@@ -29,15 +27,6 @@ class Blank
   def blank(&block)
     block.call
     self
-  end
-
-  # Produce the empty list.
-  #
-  # This class mixes in the Enumerable module, which relies on this.
-  #
-  # > w.each {|n| puts n }
-  def each
-    []
   end
 
   # False; this is not an instance of a wrapped value.

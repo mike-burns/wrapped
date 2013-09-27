@@ -1,8 +1,6 @@
 # A class that represents a wrapped value. This class holds something that is
 # not nil.
 class Present
-  include Enumerable
-
   # Use Object#wrapped and NilClass#wrapped instead.
   def initialize(value) # :nodoc:
     @value = value
@@ -37,18 +35,6 @@ class Present
   # > w.blank { puts "Symbol not found" }.present {|s| puts users[s]}
   def blank(&ignored)
     self
-  end
-
-  # Produce the singleton list with the unwrapped value as its only member.
-  #
-  # If a block is passed, it is run against the unwrapped value.
-  #
-  # This class mixes in Enumerable, which is controlled by this method.
-  #
-  # > w.each {|n| puts "Found #{n}" }
-  def each
-    yield unwrap if block_given?
-    [unwrap]
   end
 
   # The raw value. I doubt you need this method.
