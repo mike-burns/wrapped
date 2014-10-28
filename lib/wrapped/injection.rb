@@ -1,13 +1,13 @@
 require 'wrapped/present'
 require 'wrapped/blank'
 
-class Object
+class BasicObject
   # Wrap the object, forcing the user to be aware of the potential for a nil
   # value by unwrapping it.
   #
   # See the Present class for details on how to unwrap it.
   def wrapped
-    Present.new(self)
+    ::Present.new(self)
   end
 end
 

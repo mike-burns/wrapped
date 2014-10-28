@@ -1,9 +1,11 @@
 require 'spec_helper'
+require 'delegate'
 
 describe Wrapped, 'conversion' do
-  let(:value)   { 1 }
-  let(:just)    { 1.wrapped }
-  let(:nothing) { nil.wrapped }
+  let(:value)     { 1 }
+  let(:just)      { 1.wrapped }
+  let(:nothing)   { nil.wrapped }
+  let(:delegator) { SimpleDelegator.new(value).wrapped }
 
   it "converts the value to a Present" do
     just.should be_instance_of(Present)
@@ -11,6 +13,11 @@ describe Wrapped, 'conversion' do
 
   it "converts the nil to a Blank" do
     nothing.should be_instance_of(Blank)
+  end
+
+  it "converts a simple delegator to a Present" do
+    delegator.should be_instance_of(Present)
+    delegator.unwrap.should be_instance_of(SimpleDelegator)
   end
 end
 
