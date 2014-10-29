@@ -92,6 +92,6 @@ class Present
   # > 1.wrapped == 1.wrapped
   # > nil.wrapped == 2.wrapped
   def ==(other)
-    unwrap == other.unwrap_or(nil)
+    other.is_a?(Present) && unwrap == other.unwrap_or(nil)
   end
 end

@@ -201,4 +201,12 @@ describe Wrapped, 'equality' do
   it 'is not equal with a wrapped value and a wrapped nil' do
     1.wrapped.should_not == nil.wrapped
   end
+
+  it 'is not equal with a present value and un unwrapped value' do
+    1.wrapped.should_not == 1
+  end
+
+  it 'is not equal with a blank value and an unwrapped value' do
+    nil.wrapped.should_not == 1
+  end
 end

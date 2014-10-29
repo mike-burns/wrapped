@@ -70,6 +70,6 @@ class Blank
   # > nil.wrapped == nil.wrapped
   # > 1.wrapped == nil.wrapped
   def ==(other)
-    other.blank?
+    other.is_a?(Blank)
   end
 end
