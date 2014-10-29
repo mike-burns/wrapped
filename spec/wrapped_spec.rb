@@ -158,12 +158,12 @@ describe Wrapped, 'monadic' do
   let(:just)    { 1.wrapped }
   let(:nothing) { nil.wrapped }
 
-  it 'produces the value from #try for a wrapped value' do
-    just.try {|n| (n+1).wrapped }.unwrap.should == value+1
+  it 'produces the value from #flat_map for a wrapped value' do
+    just.flat_map {|n| (n+1).wrapped }.unwrap.should == value+1
   end
 
-  it 'produces blank from #try for a wrapped nil' do
-    nothing.try {|n| (n+1).wrapped}.should be_blank
+  it 'produces blank from #flat_map for a wrapped nil' do
+    nothing.flat_map {|n| (n+1).wrapped}.should be_blank
   end
 end
 

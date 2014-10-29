@@ -68,13 +68,13 @@ class Present
 
   # Run a block against the unwrapped value, producing the result of the block.
   #
-  # > w.try {|n| n+1 }
+  # > w.flat_map {|n| n+1 }
   #
   # Also, you can use this like you would use >>= in Haskell. This and wrapped
   # make it a monad.
   #
-  # > w.try {|n| (n+1).wrapped }
-  def try
+  # > w.flat_map {|n| (n+1).wrapped }
+  def flat_map
     yield unwrap
   end
 

@@ -52,8 +52,8 @@ class Blank
 
   # Do nothing, returning itself.
   #
-  # > w.try {|n| n+1 }
-  def try
+  # > w.flat_map {|n| n+1 }
+  def flat_map
     self
   end
 
