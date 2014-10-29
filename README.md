@@ -104,9 +104,9 @@ For example:
     irb(main):055:0> nil.wrapped.inject(0) {|_, n| n+1}
     => 0
 
-And then we have `try`, which you can use to produce another wrapped object:
+And then we have `flat_map`, which you can use to produce another wrapped object:
 
-    irb> 1.wrapped.try {|n| (n + 1).wrapped}.try {|n| (n*2).wrapped}.unwrap
+    irb> 1.wrapped.flat_map {|n| (n + 1).wrapped}.flat_map {|n| (n*2).wrapped}.unwrap
     => 4
 
 Those same people who will exclaim things about functors will, at this point,
@@ -166,4 +166,4 @@ functor or the option class for more.
 
 Copyright
 ---------
-Copyright 2011 Mike Burns
+Copyright 2011 - 2014 Mike Burns, Joe Ferris
