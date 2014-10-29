@@ -39,7 +39,7 @@ class Present
     self
   end
 
-  # Produce the singleton list with the unwrapped value as its only member.
+  # Produces itself.
   #
   # If a block is passed, it is run against the unwrapped value.
   #
@@ -48,7 +48,27 @@ class Present
   # > w.each {|n| puts "Found #{n}" }
   def each
     yield unwrap if block_given?
-    [unwrap]
+    self
+  end
+
+  # Produces itself if the block evaluates to true. Produces Blank if the block
+  # evaluates to false.
+  def select
+    super.first.wrapped
+  end
+
+  alias_method :find_all, :select
+
+  # Produces itself if the block evaluates to false. Produces Blank if the block
+  # evaluates to true.
+  def reject
+    super.first.wrapped
+  end
+
+  # Produces itself if the unwrapped value matches the given expression.
+  # Produces Blank otherwise.
+  def grep(*_args)
+    super.first.wrapped
   end
 
   # The raw value. I doubt you need this method.
@@ -86,6 +106,9 @@ class Present
   def fmap
     (yield unwrap).wrapped
   end
+
+  alias_method :collect, :fmap
+  alias_method :map, :fmap
 
   # Is this wrapped value equal to the given wrapped value?
   #

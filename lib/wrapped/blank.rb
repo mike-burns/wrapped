@@ -37,7 +37,24 @@ class Blank
   #
   # > w.each {|n| puts n }
   def each
-    []
+    self
+  end
+
+  # Produces itself.
+  def select
+    self
+  end
+
+  alias_method :find_all, :select
+
+  # Produces itself.
+  def reject
+    self
+  end
+
+  # Produces itself.
+  def grep(*_args)
+    self
   end
 
   # False; this is not an instance of a wrapped value.
@@ -63,6 +80,9 @@ class Blank
   def fmap
     self
   end
+
+  alias_method :collect, :fmap
+  alias_method :map, :fmap
 
   # Is this wrapped value equal to the given wrapped value? All blank values
   # are equal to each other.
