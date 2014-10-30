@@ -6,6 +6,13 @@ your code to find bugs earlier and faster. It works like this: any time you
 write a method that could produce nil, you instead write a method that produces
 a wrapped value.
 
+Warning: Experimental
+---------------------
+
+This library is in an early, experimental phase and may change suddenly and
+drastically. Backwards-compatibility should not be expected between releases,
+and the project may be cancelled at any time.
+
 Example
 -------
 
