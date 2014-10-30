@@ -173,4 +173,4 @@ functor or the option class for more.
 
 Copyright
 ---------
-Copyright 2011 - 2014 Mike Burns, Joe Ferris
+Copyright 2011 Mike Burns. Copyright 2014 thoughtbot.
