@@ -84,7 +84,7 @@ class Present
   #
   # This makes it a functor.
   def fmap
-    (yield unwrap).wrapped
+    Present.new(yield unwrap)
   end
 
   # Is this wrapped value equal to the given wrapped value?

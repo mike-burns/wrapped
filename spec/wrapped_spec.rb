@@ -179,6 +179,35 @@ describe Wrapped, 'functor' do
   it 'produces the blank for a wrapped nil' do
     expect(nothing.fmap {|n| n+1}).to be_blank
   end
+
+  it 'obeys the functor law: fmap id  ==  id' do
+    expect(fmap(id).(just)).to eq(id.(just))
+  end
+
+  it 'obeys the functor law: fmap (f . g)  ==  fmap f . fmap g' do
+    expect(fmap(compose(null, const(nil))).(just)).
+      to eq(compose(fmap(null), fmap(const(nil))).(just))
+  end
+
+  def fmap(f)
+    lambda { |x| x.fmap(&f) }
+  end
+
+  def const(x)
+    lambda { |_| x }
+  end
+
+  def id
+    lambda { |x| x }
+  end
+
+  def compose(f, g)
+    lambda { |x| f.call(g.call(x)) }
+  end
+
+  def null
+    lambda {|x| x.nil? }
+  end
 end
 
 describe Wrapped, 'equality' do
