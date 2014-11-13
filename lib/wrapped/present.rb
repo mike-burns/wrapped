@@ -14,12 +14,8 @@ class Present
   #
   # > w.unwrap_or(0)
   # > w.unwrap_or("hello") {|s| "Hi, #{s}" }
-  def unwrap_or(_)
-    if block_given?
-      yield unwrap
-    else
-      unwrap
-    end
+  def unwrap_or(_default = nil)
+    unwrap
   end
 
   # Invoke the block on the value, unwrapped. This method produces the wrapped

@@ -10,8 +10,12 @@ class Blank
   # Produce the value that is passed in.
   #
   # > w.unwrap_or(0)
-  def unwrap_or(default)
-    default
+  def unwrap_or(default = nil)
+    if block_given?
+      yield
+    else
+      default
+    end
   end
 
   # Does nothing, returning itself. This is chainable. See blank for its

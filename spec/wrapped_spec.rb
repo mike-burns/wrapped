@@ -136,20 +136,20 @@ describe Wrapped, 'unwrap_or' do
   let(:just)    { 1.wrapped }
   let(:nothing) { nil.wrapped }
 
-  it 'produces the value for a wrapped value' do
+  it 'produces the value for a wrapped value with an argument' do
     expect(just.unwrap_or(-1)).to eq(value)
   end
 
-  it 'produces the default for a wrapped nil' do
+  it 'produces the argument for a wrapped nil with an argument' do
     expect(nothing.unwrap_or(-1)).to eq(-1)
   end
 
-  it 'produces the value of the block for a wrapped object' do
-    expect(just.unwrap_or(-1) {|n| n+1}).to eq(value + 1)
+  it 'produces the value for a wrapped value with a block' do
+    expect(just.unwrap_or { value + 1 }).to eq(value)
   end
 
-  it 'produces the default for a wrapped nil even with a block' do
-    expect(nothing.unwrap_or(-1) {2}).to eq(-1)
+  it 'produces the block result for a wrapped nil with a block' do
+    expect(nothing.unwrap_or { 2 }).to eq(2)
   end
 end
 
