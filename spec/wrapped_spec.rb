@@ -78,9 +78,6 @@ describe Wrapped, 'callbacks' do
   end
 end
 
-# This behavior is different from Haskell and Scala.
-# It is done this way for consistency with Ruby.
-# See the functor description later for `fmap'.
 describe Wrapped, 'enumerable' do
   let(:value)   { 1 }
   let(:just)    { 1.wrapped }
@@ -92,8 +89,8 @@ describe Wrapped, 'enumerable' do
     expect(result).to eq(value)
   end
 
-  it 'produces a singleton array of the value for a wrapped value on #each' do
-    expect(just.each).to eq([value])
+  it 'produces itself for #each' do
+    expect(just.each).to eq(just)
   end
 
   it 'skips the block for #each on a wrapped nil' do
@@ -102,16 +99,62 @@ describe Wrapped, 'enumerable' do
     expect(result).to eq(-1)
   end
 
-  it 'produces the empty array for a wrapped nil on #each' do
-    expect(nothing.each).to be_empty
+  it 'produces blank for a wrapped nil on #each' do
+    expect(nothing.each).to eq(nothing)
   end
 
   it 'maps over the value for a wrapped value' do
-    expect(just.map {|n| n + 1}).to eq([value+1])
+    expect(just.map {|n| n + 1}).to eq((value+1).wrapped)
   end
 
-  it 'map produces the empty list for a wrapped nil' do
-    expect(nothing.map {|n| n + 1}).to eq([])
+  it 'map produces blank' do
+    expect(nothing.map {|n| n + 1}).to be_instance_of(Blank)
+  end
+
+  it 'aliases map to collect' do
+    expect(just.method(:collect)).to be_alias_of(just.method(:map))
+    expect(nothing.method(:collect)).to be_alias_of(nothing.method(:map))
+  end
+
+  it 'select produces present for a value matching the block' do
+    expect(just.select { |n| n == value }).to eq(just)
+  end
+
+  it 'select produces blank for a value that does not match the block' do
+    expect(just.select { |n| n != value }).to be_instance_of(Blank)
+  end
+
+  it 'select products blank for a blank' do
+    expect(nothing.select { true }).to be_instance_of(Blank)
+  end
+
+  it 'aliases select to find_all' do
+    expect(just.method(:find_all)).to be_alias_of(just.method(:select))
+    expect(nothing.method(:find_all)).to be_alias_of(nothing.method(:select))
+  end
+
+  it 'reject produces present for a value matching the block' do
+    expect(just.reject { |n| n != value }).to eq(just)
+  end
+
+  it 'reject produces blank for a value that does not match the block' do
+    expect(just.reject { |n| n == value }).to be_instance_of(Blank)
+  end
+
+  it 'reject products blank for a blank' do
+    expect(nothing.reject { true }).to be_instance_of(Blank)
+  end
+
+  it 'grep produces present for a value matching the pattern' do
+    expect("hello".wrapped.grep(/ello$/)).to eq("hello".wrapped)
+  end
+
+  it 'grep produces blank for a value that does not match the pattern' do
+    expect("hello".wrapped.grep(/^ello/)).to be_instance_of(Blank)
+  end
+
+  it 'grep products blank for a blank' do
+    expect(nothing.grep(/.*/)).to be_instance_of(Blank)
   end
 end
 
